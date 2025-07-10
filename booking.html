@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КиноМир - Заказ билетов</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        .booking-form {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #555;
+        }
+        .hall-layout {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .screen {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 80%;
+        }
+        .seats {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .seat {
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        .seat.selected {
+            background: #f44336;
+        }
+        .seat.occupied {
+            background: #ddd;
+            cursor: not-allowed;
+        }
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>КиноМир</h1>
+        <p>Заказ билетов онлайн</p>
+    </header>
+    
+    <nav>
+        <a href="MainPG.html">Главная</a>
+        <a href="Sessions.html">Киносеансы</a>
+        <a href="booking.html">Заказ билетов</a>
+        <a href="About.html">О кинотеатре</a>
+        <a href="infost.html">Контакты</a>
+    </nav>
+    
+    <div class="container">
+        <div class="booking-form">
+            <h2>Заказ билетов</h2>
+            
+            <div class="form-group">
+                <label for="movie">Фильм:</label>
+                <select id="movie">
+                    <option value="1">Пример фильма 1</option>
+                    <option value="2">Пример фильма 2</option>
+                    <option value="3">Пример фильма 3</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Дата:</label>
+                <input type="date" id="date">
+            </div>
+            
+            <div class="form-group">
+                <label for="time">Время сеанса:</label>
+                <select id="time">
+                    <option value="10:00">10:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="17:00">17:00</option>
+                    <option value="20:30">20:30</option>
+                </select>
+            </div>
+            
+            <div class="hall-layout">
+                <div class="screen">ЭКРАН</div>
+                <div class="seats" id="seats">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Ваше имя:</label>
+                <input type="text" id="name">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email">
+            </div>
+            
+            <button type="button" onclick="alert('Билеты забронированы!')">Забронировать</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>КиноМир &copy; 2025. Все права защищены.</p>
+    </footer>
+    
+    <script>
+        const seatsContainer = document.getElementById('seats');
+        const rows = 5;
+        const seatsPerRow = 10;
+        
+        for (let row = 1; row <= rows; row++) {
+            for (let seat = 1; seat <= seatsPerRow; seat++) {
+                const seatElement = document.createElement('div');
+                seatElement.className = 'seat';
+                seatElement.textContent = `${row}${String.fromCharCode(64 + seat)}`;
+                
+            
+                if (Math.random() > 0.7) {
+                    seatElement.classList.add('occupied');
+                }
+                
+                seatElement.addEventListener('click', function() {
+                    if (!this.classList.contains('occupied')) {
+                        this.classList.toggle('selected');
+                    }
+                });
+                
+                seatsContainer.appendChild(seatElement);
+            }
+        }
+    </script>
+</body>
+</html>
